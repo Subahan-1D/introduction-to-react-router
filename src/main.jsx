@@ -13,6 +13,7 @@ import Usears from './components/Usears/Usears.jsx';
 import UserDetails from './components/UserDetails/UserDetails.jsx';
 import Posts from './components/Posts/Posts.jsx';
 import ShowDetails from './components/ShowDetails/ShowDetails.jsx';
+import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
 
     path: '/',
     element: <Home></Home>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/about",
