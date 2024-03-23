@@ -10,32 +10,50 @@ import Home from './components/Home/Home.jsx';
 import About from './components/About/About.jsx';
 import Contact from './components/Contact/Contact.jsx';
 import Usears from './components/Usears/Usears.jsx';
+import UserDetails from './components/UserDetails/UserDetails.jsx';
+import Posts from './components/Posts/Posts.jsx';
+import ShowDetails from './components/ShowDetails/ShowDetails.jsx';
 
 
 const router = createBrowserRouter([
- {
+  {
 
-  path:'/',
-  element:<Home></Home>,
-  children:[
-    {
-      path:"/about",
-      element:<About></About>
-    },
-    {
-      path:"/contact",
-      element:<Contact></Contact>
-    },
-    {
-      path:"/usears",
-      loader:()=> fetch('https://jsonplaceholder.typicode.com/users'),
-      element:<Usears></Usears>
-    }
-  ]
- }
+    path: '/',
+    element: <Home></Home>,
+    children: [
+      {
+        path: "/about",
+        element: <About></About>
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>
+      },
+      {
+        path: "/usears",
+        loader: () => fetch('https://jsonplaceholder.typicode.com/users'),
+        element: <Usears></Usears>
+      },
+      {
+        path:"/user/:userId",
+        loader:({params}) => fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`),
+        element:<UserDetails></UserDetails>
+      },
+      {
+        path:"/posts",
+        loader:()=>fetch('https://jsonplaceholder.typicode.com/posts'),
+        element:<Posts></Posts>
+      },
+      {
+        path:"/post/:postId",
+        loader:({params})=>fetch(`https://jsonplaceholder.typicode.com/posts/${params.postId}`),
+        element:<ShowDetails></ShowDetails>
+      }
+    ]
+  }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-   <RouterProvider router={router}></RouterProvider>
+    <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>,
 )
